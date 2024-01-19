@@ -1,0 +1,22 @@
+name: "Terraform Plan"
+
+on: [workflow_dispatch]   #pull_request:
+
+jobs:
+  terraform:
+    name: "Terraform Plan"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+  steps:
+  - uses: hashicorp/setup-terraform@v3
+  
+  - run: terraform init
+  
+  - id: plan
+    run: terraform plan -no-color
+  
+  - run: echo ${{ steps.plan.outputs.stdout }}
+  - run: echo ${{ steps.plan.outputs.stderr }}
+  - run: echo ${{ steps.plan.outputs.exitcode }}

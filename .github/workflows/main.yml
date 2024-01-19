@@ -11,6 +11,9 @@ jobs:
       pull-requests: write
     steps:
     - uses: hashicorp/setup-terraform@v3
+
+    - name: Checkout code (clone into our container)
+      uses: actions/checkout@v4
     
     - run: terraform init
     
